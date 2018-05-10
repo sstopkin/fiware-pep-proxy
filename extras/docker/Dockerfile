@@ -19,6 +19,9 @@ RUN git clone https://github.com/ging/fiware-pep-proxy.git && \
     cd fiware-pep-proxy && \
     npm install
 
+COPY entrypoint-common.sh /opt/fiware-pep-proxy/entrypoint-common.sh
+COPY docker-entrypoint.sh /opt/fiware-pep-proxy/docker-entrypoint.sh
+RUN chmod 755 docker-entrypoint.sh
+
 # Run PEP Proxy
-WORKDIR /opt/fiware-pep-proxy
-CMD ["node", "server.js"]
+ENTRYPOINT ["/opt/fiware-idm/docker-entrypoint.sh"]
