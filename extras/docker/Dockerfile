@@ -6,7 +6,7 @@ WORKDIR /opt
 
 # Install Ubuntu dependencies
 RUN apt-get update && \
-    apt-get install build-essential ca-certificates curl git software-properties-common python-software-properties -y --no-install-recommends && \
+    apt-get install build-essential ca-certificates curl git netcat software-properties-common python-software-properties -y --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 # Install PPA
@@ -19,9 +19,12 @@ RUN git clone https://github.com/ging/fiware-pep-proxy.git && \
     cd fiware-pep-proxy && \
     npm install
 
+# Change Workdir
+WORKDIR /opt/fiware-pep-proxy
+
 COPY entrypoint-common.sh /opt/fiware-pep-proxy/entrypoint-common.sh
 COPY docker-entrypoint.sh /opt/fiware-pep-proxy/docker-entrypoint.sh
 RUN chmod 755 docker-entrypoint.sh
 
 # Run PEP Proxy
-ENTRYPOINT ["/opt/fiware-idm/docker-entrypoint.sh"]
+ENTRYPOINT ["/opt/fiware-pep-proxy/docker-entrypoint.sh"]
