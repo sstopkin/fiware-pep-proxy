@@ -73,11 +73,9 @@ app.all('/*', Root.pep);
 log.info('Starting PEP proxy in port ' + port + '. IdM authentication ...');
 
 IDM.authenticate (function (token) {
-
     log.info('Success authenticating PEP proxy. Proxy Auth-token: ', token);
-
 }, function (status, e) {
-    log.error('Error in keystone communication', e);
+    log.error('Failed to authenticate PEP proxy', e);
 });
 
 if (config.https.enabled === true) {
