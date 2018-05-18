@@ -11,7 +11,6 @@ config.https = config.https || {};
 var log = require('./lib/logger').logger.getLogger("Server");
 
 var express = require('express');
-var cors = require('cors');
 
 process.on('uncaughtException', function (err) {
   log.error('Caught exception: ' + err);
@@ -19,8 +18,6 @@ process.on('uncaughtException', function (err) {
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var app = express();
-
-app.use(cors())
 
 //app.use(express.bodyParser());
 
