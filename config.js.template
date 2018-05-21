@@ -55,3 +55,6 @@ config.public_paths = [];
 config.magic_key = undefined;
 
 module.exports = config;
+
+// Specify base path for PEP Proxy that is cut out from downstream request path
+config.pep_base_path = undefined

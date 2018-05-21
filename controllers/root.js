@@ -98,10 +98,18 @@ var Root = (function() {
 
         var protocol = config.app.ssl ? 'https' : 'http';
 
+        let path = req.url;
+        if (!!config.pep_base_path && config.pep_base_path.trim().length) {
+            let split = path.split(config.pep_base_path.trim());
+            if (split.length > 1) {
+                path = split[split.length - 1];
+            }
+        }
+
         var options = {
             host: config.app.host,
             port: config.app.port,
-            path: req.url,
+            path: path,
             method: req.method,
             headers: proxy.getClientIp(req, req.headers)
         };
